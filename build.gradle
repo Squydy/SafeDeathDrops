@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'dev.safedeathdrops'
+version = '1.0.0'
+archivesBaseName = 'safedeathdrops'
+
+sourceCompatibility = '21' // Make sure this matches your Minecraft version requirements
+targetCompatibility = '21' // Typically Minecraft uses JDK 17 or higher
+
+repositories {
+  maven {
+    name = "papermc"
+    url = uri("https://repo.papermc.io/repository/maven-public/")
+  }
+}
+
+dependencies {
+    // Paper API dependency
+    implementation 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+}
+
+tasks {
+    // This task is responsible for including the plugin.yml when building the JAR
+    jar {
+        from('src/main/resources') {
+            include 'plugin.yml' // Include your plugin.yml in the JAR file
+			duplicatesStrategy = DuplicatesStrategy.EXCLUDE // or DuplicatesStrategy.WARN
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+

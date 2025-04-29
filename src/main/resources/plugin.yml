@@ -1,0 +1,5 @@
+name: SafeDeathDrops
+version: 1.0
+main: dev.safedeathdrops.SafeDeathDrops
+author: Squydy
+description: Stops explosions after death from deleteing items
