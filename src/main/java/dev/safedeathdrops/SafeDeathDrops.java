@@ -46,7 +46,7 @@ public class SafeDeathDrops extends JavaPlugin implements Listener {
         if (damageEvent instanceof EntityDamageByEntityEvent entityDamage) {
             Entity damager = entityDamage.getDamager();
             
-            //creeper explosion dont do this? maybe cause they kill you with an explosion instead of the proectile killing you then exploding.
+            //creeper explosion arent need, probably cause they kill you with an explosion instead of the proectile killing you then exploding
             //also might be a second wither projectile
             if (damager instanceof Fireball || damager instanceof WitherSkull) {
                 List<ItemStack> drops = new ArrayList<>(event.getDrops());
@@ -61,11 +61,12 @@ public class SafeDeathDrops extends JavaPlugin implements Listener {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
+                            //probably good to check that the items are still there
                             if (!dropped.isDead()) {
                                 dropped.setInvulnerable(false);
                             }
                         }
-                    //use config here for adjustment
+                    //use config here for adjustment, maybe add more settings later???
                     }.runTaskLater(this, invulnerableDurationTicks);
                 }
             }
